@@ -24,7 +24,7 @@
       ? JSON.parse(localStorage.getItem("movies"))
       : [];
     movies = tempMovies.filter((movie) =>
-      movie.title.toLowerCase.includes(searchTerm.toLowerCase())
+      movie.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
   };
 </script>
