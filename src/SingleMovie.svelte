@@ -1,5 +1,4 @@
 <script>
-  import { createEventDispatcher } from "svelte";
   import MovieInput from "./MovieInput.svelte";
   import { movies } from "./stores";
 

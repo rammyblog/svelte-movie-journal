@@ -8,28 +8,20 @@
     movies.add(detail.movie);
   };
 
-
   const clearSearch = () => {
-    localStorage.getItem("movies")
-      ? JSON.parse(localStorage.getItem("movies"))
-      : [];
+    movies.clearSearch();
   };
 
   const search = ({ detail }) => {
     const { searchTerm } = detail;
-    const tempMovies = localStorage.getItem("movies")
-      ? JSON.parse(localStorage.getItem("movies"))
-      : [];
-    // movies = tempMovies.filter((movie) =>
-    //   movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-    // );
+    movies.search(searchTerm);
   };
 </script>
 
 <div class="main">
   <h1>Movie Journal</h1>
   <Search on:clearSearch={clearSearch} on:search={search} />
-  <MovieInput on:submitMovie={submitMovie}  />
+  <MovieInput on:submitMovie={submitMovie} />
   <MovieList movies={$movies} />
 </div>
 

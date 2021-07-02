@@ -31,14 +31,21 @@ function createMovie(){
             localStorage.setItem("movies", JSON.stringify(tempMovies));
             return tempMovies; 
         }),
-        // search = () => update(movies => {
-        //     const tempMovies = localStorage.getItem("movies")
-        //     ? JSON.parse(localStorage.getItem("movies"))
-        //     : [];
-        //   // movies = tempMovies.filter((movie) =>
-        //   //   movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-        //   // );
-        // })
+        search :(searchTerm) => update(movies => {
+            const tempMovies = [...movies]
+            console.log(tempMovies.filter((movie) =>
+            movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+           ))
+          return tempMovies.filter((movie) =>
+           movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }),
+
+        clearSearch: () => update(movies => {
+           return  localStorage.getItem("movies")
+           ? JSON.parse(localStorage.getItem("movies"))
+           : [];
+        })
     };
 }
 export const movies = createMovie()
