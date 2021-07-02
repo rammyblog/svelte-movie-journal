@@ -2,15 +2,12 @@
   import MovieInput from "./MovieInput.svelte";
   import MovieList from "./MovieList.svelte";
   import Search from "./Search.svelte";
+  import { movies } from "./stores";
 
-  let movies = localStorage.getItem("movies")
-    ? JSON.parse(localStorage.getItem("movies"))
-    : [];
   const submitMovie = ({ detail }) => {
-    const updatedMovies = [...movies, detail.movie];
-    localStorage.setItem("movies", JSON.stringify(updatedMovies));
-    movies = updatedMovies;
+    movies.add(detail.movie);
   };
+
 
   const clearSearch = () => {
     localStorage.getItem("movies")
@@ -23,17 +20,17 @@
     const tempMovies = localStorage.getItem("movies")
       ? JSON.parse(localStorage.getItem("movies"))
       : [];
-    movies = tempMovies.filter((movie) =>
-      movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // movies = tempMovies.filter((movie) =>
+    //   movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+    // );
   };
 </script>
 
 <div class="main">
   <h1>Movie Journal</h1>
   <Search on:clearSearch={clearSearch} on:search={search} />
-  <MovieInput on:submitMovie={submitMovie} />
-  <MovieList {movies} />
+  <MovieInput on:submitMovie={submitMovie}  />
+  <MovieList movies={$movies} />
 </div>
 
 <style>
